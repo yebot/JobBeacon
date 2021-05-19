@@ -24,10 +24,6 @@
     "react": "^17.0.2",
     "react-dom": "16.x"
   },
-  "jest": {
-    "globalSetup": "./jest-setup.js",
-    "globalTeardown": "./jest-teardown.js"
-  },
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
