@@ -1,8 +1,15 @@
+const db = require('../models/jobModels.js');
+
 const jobController = {};
 
 // Get all jobs
 jobController.getJobs = (req, res, next) => {
-  next();
+  db.query('SELECT * FROM job_listing')
+    .then(((results) => {
+      res.locals.jobs = results
+      next();
+    }
+    ));
 };
 
 // Post a new job
