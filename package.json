@@ -18,6 +18,10 @@
     "url": "https://github.com/TeamEevee42/JobBeacon/issues"
   },
   "homepage": "https://github.com/TeamEevee42/JobBeacon#readme",
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "dotenv": "^9.0.2",
