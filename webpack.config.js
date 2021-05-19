@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const path = require('path');
 
 const rules = [{
@@ -35,7 +36,7 @@ module.exports = {
 
   devServer: {
     publicPath: '/build',
-    // port: 9000,
+    port: 9000,
   },
   resolve: {
     extensions: ['.js', '.jsx'],
