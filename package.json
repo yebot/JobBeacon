@@ -20,8 +20,10 @@
   "homepage": "https://github.com/TeamEevee42/JobBeacon#readme",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "prop-types": "^15.7.2",
     "pg": "^8.6.0",
     "react": "^17.0.2",
     "react-dom": "16.x"

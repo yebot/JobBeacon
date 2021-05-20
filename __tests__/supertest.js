@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 const supertest = require('supertest');
 const app = require('../server/server');
-const { pool } = require('../server/models/jobModels');
 
 const request = supertest(app);
 //const request = require('supertest');
@@ -50,7 +49,7 @@ describe('Testing Routes', () => {
 
     describe('PUT', () => {
       it('responds with 200 status and application/json content type', async (done) => {
-        const response = await request.put('/job/${randomID}');
+        const response = await request.put(`/job/${randomID}`);
         expect(response.status).toBe(200);
         expect(response.header['content-type']).toBe('application/json; charset=utf-8');
         done();
@@ -65,7 +64,7 @@ describe('Testing Routes', () => {
 
     describe('DELETE', () => {
       it('responds with 200 status and application/json content type', async (done) => {
-        const response = await request.delete('/job/${randomID}');
+        const response = await request.delete(`/job/${randomID}`);
         expect(response.status).toBe(200);
         expect(response.header['content-type']).toBe('application/json; charset=utf-8');
         done();
