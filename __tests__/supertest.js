@@ -1,29 +1,45 @@
 /* eslint-disable global-require */
 /* eslint-disable no-undef */
-const request = require('supertest');
+const supertest = require('supertest');
+const app = require('../server/server');
+const { pool } = require('../server/models/jobModels');
 
+const request = supertest(app);
+//const request = require('supertest');
 const serverAddr = 'http://localhost:3000';
-// const randomID = minVal+(Math.random()*(maxVal-minVal));
-// Math.round(randVal);
-// console.log(randomID);
+const randomID = Math.round(1 + (Math.random() * (999 - 1)));
+
+// console.log(app);
 
 describe('Testing Routes', () => {
+  afterAll(async (done) => {
+    await app.close();
+    done();
+  });
+
   describe('/job', () => {
     describe('GET', () => {
-      it('responds with 200 status and application/json content type', () => request(serverAddr)
-        .get('/job')
-        // .expect('Content-Type', /application\/json/)
-        .expect(200));
+      it('responds with 200 status and application/json content type', async (done) => {
+        const response = await request.get('/job');
+        expect(response.status).toBe(200);
+        expect(response.header['content-type']).toBe('application/json; charset=utf-8');
+        done();
+      });
 
-      xit('jobs from "DB" json are in body of response', () => {
+      it('gets jobs from database as json in body of response', async (done) => {
+        const response = await request.get('/job');
+        expect(response.body.jobs).toBeTruthy(); // response
+        done();
       });
     });
 
     describe('POST', () => {
-      it('responds with 200 status and application/json content type', () => request(serverAddr)
-        .post('/job')
-        // .expect('Content-Type', /application\/json/)
-        .expect(200));
+      it('responds with 200 status and application/json content type', async (done) => {
+        const response = await request.post('/job');
+        expect(response.status).toBe(200);
+        expect(response.header['content-type']).toBe('application/json; charset=utf-8');
+        done();
+      });
 
       xit('responds with TRUE', () => {
       });
@@ -33,10 +49,12 @@ describe('Testing Routes', () => {
     });
 
     describe('PUT', () => {
-      it('responds with 200 status and application/json content type', () => request(serverAddr)
-        .put('/job')
-        // .expect('Content-Type', /application\/json/)
-        .expect(200));
+      it('responds with 200 status and application/json content type', async (done) => {
+        const response = await request.put('/job/${randomID}');
+        expect(response.status).toBe(200);
+        expect(response.header['content-type']).toBe('application/json; charset=utf-8');
+        done();
+      });
 
       xit('responds with TRUE', () => {
       });
@@ -46,10 +64,12 @@ describe('Testing Routes', () => {
     });
 
     describe('DELETE', () => {
-      it('responds with 200 status and application/json content type', () => request(serverAddr)
-        .delete('/job')
-        // .expect('Content-Type', /application\/json/)
-        .expect(200));
+      it('responds with 200 status and application/json content type', async (done) => {
+        const response = await request.delete('/job/${randomID}');
+        expect(response.status).toBe(200);
+        expect(response.header['content-type']).toBe('application/json; charset=utf-8');
+        done();
+      });
 
       xit('responds with TRUE', () => {
       });
@@ -59,3 +79,11 @@ describe('Testing Routes', () => {
     });
   });
 });
+
+/* 
+
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js"
+  },
+*/
